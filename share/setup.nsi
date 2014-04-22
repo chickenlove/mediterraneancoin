@@ -6,7 +6,7 @@ SetCompressor /SOLID lzma
 # General Symbol Definitions
 !define REGKEY "SOFTWARE\$(^Name)"
  
-!define VERSION 0.8.6.2
+!define VERSION 0.8.7.1
 !define COMPANY "Mediterraneancoin project"
 !define URL http://www.mediterraneancoin.org/
  
@@ -47,16 +47,15 @@ Var StartMenuGroup
 !insertmacro MUI_LANGUAGE English
 
 # Installer attributes
-
-OutFile mediterraneancoin-0.8.6.2-win32-setup.exe
+OutFile litecoin-${VERSION}-win32-setup.exe
 InstallDir $PROGRAMFILES\Mediterraneancoin
  
 CRCCheck on
 XPStyle on
 BrandingText " "
 ShowInstDetails show
- 
-VIProductVersion 0.8.6.2
+
+VIProductVersion ${VERSION}
 VIAddVersionKey ProductName Mediterraneancoin
  
 VIAddVersionKey ProductVersion "${VERSION}"

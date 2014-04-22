@@ -1,8 +1,10 @@
 TEMPLATE = app
+ 
 
 TARGET = mediterraneancoin-qt
 macx:TARGET = "Mediterraneancoin-Qt"
-VERSION = 0.8.6.2
+VERSION = 0.8.7.1
+
 
 INCLUDEPATH += src src/json src/qt
 QT += core gui network

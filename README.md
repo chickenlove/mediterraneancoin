@@ -3,9 +3,10 @@ Mediterraneancoin integration/staging tree
 
 http://www.mediterraneancoin.org
 
-Copyright (c) 2009-2013 Bitcoin Developers<br/>
-Copyright (c) 2009-2013 Litecoin Developers<br/>
+Copyright (c) 2009-2014 Bitcoin Developers<br/>
+Copyright (c) 2009-2014 Litecoin Developers<br/>
 Copyright (c) 2013-2014 Mediterraneancoin Developers<br/>
+
 
 What is Mediterraneancoin?
 ----------------
