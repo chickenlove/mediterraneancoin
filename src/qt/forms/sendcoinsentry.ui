@@ -161,6 +161,21 @@
     </widget>
     </item>
 
+    <item>
+     <widget class="QComboBox" name="platformComboBox">
+         <item>
+          <property name="text">
+           <string>Twitter</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Weibo</string>
+          </property>
+         </item>
+     </widget>
+    </item>
+
      <item> 
       <widget class="QToolButton" name="lookupUserButton">
        <property name="toolTip">

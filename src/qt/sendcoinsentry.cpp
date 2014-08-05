@@ -93,9 +93,11 @@ void SendCoinsEntry::on_lookupUserButton_clicked()
     QNetworkReply *reply = mgr.post(req, params.encodedQuery());
     */
 
+    QString selectedPlatform = ui->platformComboBox->currentText();
+
     QUrl params;
     params.addQueryItem("screenname", lookupUsername);
-    params.addQueryItem("platform", "twitter");
+    params.addQueryItem("platform", selectedPlatform);
     params.addQueryItem("coin", "MED");
     params.addQueryItem("simple", "true");
 
