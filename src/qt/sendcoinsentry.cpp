@@ -47,6 +47,26 @@ void SendCoinsEntry::on_pasteButton_clicked()
     ui->payTo->setText(QApplication::clipboard()->text());
 }
 
+void SendCoinsEntry::on_lookupUserButton_clicked()
+{
+    if(!model)
+        return;
+    //
+
+    ui->payTo->setText("MkVZzg7WdCVu1spaSAr68QuusfaJEacYor");
+
+    // take the label content... perform a lookup query
+
+    /*
+    {
+        ui->payTo->setText(dlg.getReturnValue());
+        ui->payAmount->setFocus();
+    }
+    */
+
+
+}
+
 void SendCoinsEntry::on_addressBookButton_clicked()
 {
     if(!model)
