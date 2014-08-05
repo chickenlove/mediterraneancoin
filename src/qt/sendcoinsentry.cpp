@@ -15,6 +15,15 @@
 #include <QApplication>
 #include <QClipboard>
 
+//
+#include <QNetworkAccessManager>
+#include <QUrl>
+#include <QNetworkRequest>
+
+
+QNetworkAccessManager* nam;
+//
+
 SendCoinsEntry::SendCoinsEntry(QWidget *parent) :
     QFrame(parent),
     ui(new Ui::SendCoinsEntry),
@@ -53,8 +62,70 @@ void SendCoinsEntry::on_lookupUserButton_clicked()
         return;
     //
 
-    ui->payTo->setText("MkVZzg7WdCVu1spaSAr68QuusfaJEacYor");
+    //ui->payTo->setText("MkVZzg7WdCVu1spaSAr68QuusfaJEacYor");
+    QString lookupUsername = ui->addAsLabel->text();
+    QString emptyString = "";
 
+    if (lookupUsername == emptyString)
+    	return;
+
+    // http://developer.nokia.com/community/wiki/Creating_an_HTTP_network_request_in_Qt
+    // http://www.insanefactory.com/2012/08/qt-http-request-in-a-single-function/
+
+
+    // create custom temporary event loop on stack
+    QEventLoop eventLoop;
+
+    // "quit()" the eventl-loop, when the network request "finished()"
+    QNetworkAccessManager mgr;
+    QObject::connect(&mgr, SIGNAL(finished(QNetworkReply*)), &eventLoop, SLOT(quit()));
+
+    /*
+    // the HTTP request
+    QNetworkRequest req( QUrl( QString("http://lookup.mediterraneancoin.org:9000/medaddresslookup") ) );
+
+    // some parameters for the HTTP request
+    QUrl params;
+    params.addQueryItem("screenname", lookupUsername);
+    params.addQueryItem("platform", "twitter");
+    params.addQueryItem("coin", "MED");
+
+    QNetworkReply *reply = mgr.post(req, params.encodedQuery());
+    */
+
+    QUrl params;
+    params.addQueryItem("screenname", lookupUsername);
+    params.addQueryItem("platform", "twitter");
+    params.addQueryItem("coin", "MED");
+    params.addQueryItem("simple", "true");
+
+    QString econdedParams(params.encodedQuery());
+
+    QNetworkRequest req( QUrl( QString("http://lookup.mediterraneancoin.org:9000/medaddresslookup?") + econdedParams ) );
+
+    QNetworkReply *reply = mgr.get(req);
+
+    eventLoop.exec(); // blocks stack until "finished()" has been called
+
+    if (reply->error() == QNetworkReply::NoError) {
+      // Everything is ok => reply->readAll()
+
+        QByteArray bytes = reply->readAll();  // bytes
+        QString string(bytes); // string
+
+        ui->payTo->setText(string);
+
+      delete reply;
+      return;
+    }
+    else {
+      // error... reply->errorString()
+      delete reply;
+      return;
+    }
+
+    // if lookupUsername != ""
+    // perform a get request....
     // take the label content... perform a lookup query
 
     /*
@@ -66,6 +137,8 @@ void SendCoinsEntry::on_lookupUserButton_clicked()
 
 
 }
+
+
 
 void SendCoinsEntry::on_addressBookButton_clicked()
 {
@@ -98,6 +171,7 @@ void SendCoinsEntry::setModel(WalletModel *model)
         connect(model->getOptionsModel(), SIGNAL(displayUnitChanged(int)), this, SLOT(updateDisplayUnit()));
 
     connect(ui->payAmount, SIGNAL(textChanged()), this, SIGNAL(payAmountChanged()));
+
 
     clear();
 }

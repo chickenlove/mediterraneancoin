@@ -19,10 +19,13 @@
   <property name="frameShadow">
    <enum>QFrame::Sunken</enum>
   </property>
+
   <layout class="QGridLayout" name="gridLayout">
+
    <property name="spacing">
     <number>12</number>
    </property>
+
    <item row="5" column="0">
     <widget class="QLabel" name="label">
      <property name="text">
@@ -36,6 +39,7 @@
      </property>
     </widget>
    </item>
+
    <item row="3" column="0">
     <widget class="QLabel" name="label_2">
      <property name="text">
@@ -49,9 +53,11 @@
      </property>
     </widget>
    </item>
+
    <item row="5" column="1">
     <widget class="BitcoinAmountField" name="payAmount"/>
    </item>
+
    <item row="4" column="0">
     <widget class="QLabel" name="label_4">
      <property name="text">
@@ -65,11 +71,14 @@
      </property>
     </widget>
    </item>
+
    <item row="3" column="1">
+
     <layout class="QHBoxLayout" name="payToLayout">
      <property name="spacing">
       <number>0</number>
      </property>
+
      <item>
       <widget class="QValidatedLineEdit" name="payTo">
        <property name="toolTip">
@@ -80,6 +89,7 @@
        </property>
       </widget>
      </item>
+
      <item>
       <widget class="QToolButton" name="addressBookButton">
        <property name="toolTip">
@@ -97,6 +107,7 @@
        </property>
       </widget>
      </item>
+
      <item>
       <widget class="QToolButton" name="pasteButton">
        <property name="toolTip">
@@ -114,6 +125,7 @@
        </property>
       </widget>
      </item>
+
      <item>
       <widget class="QToolButton" name="deleteButton">
        <property name="toolTip">
@@ -128,10 +140,31 @@
        </property>
       </widget>
      </item>
+
+
+    </layout>
+   </item>
+
+   <item row="4" column="1">
+
+
+    <layout class="QHBoxLayout" name="labelLayout">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+
+    <item>
+    <widget class="QValidatedLineEdit" name="addAsLabel">
+     <property name="toolTip">
+      <string>Enter a label for this address to add it to your address book or enter a username to lookup the coin address</string>
+     </property>
+    </widget>
+    </item>
+
      <item> 
       <widget class="QToolButton" name="lookupUserButton">
        <property name="toolTip">
-        <string>Lookup user coin address</string>
+        <string>Lookup user coin address; enter username in the Label field</string>
        </property>
        <property name="text">
         <string/>
@@ -145,16 +178,13 @@
        </property>
       </widget>
      </item>
+
     </layout>
+
    </item>
-   <item row="4" column="1">
-    <widget class="QValidatedLineEdit" name="addAsLabel">
-     <property name="toolTip">
-      <string>Enter a label for this address to add it to your address book</string>
-     </property>
-    </widget>
-   </item>
+
   </layout>
+
  </widget>
  <customwidgets>
   <customwidget>

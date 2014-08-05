@@ -6,6 +6,7 @@
 #define SENDCOINSENTRY_H
 
 #include <QFrame>
+#include <QNetworkReply>
 
 namespace Ui {
     class SendCoinsEntry;
