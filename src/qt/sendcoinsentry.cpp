@@ -100,6 +100,7 @@ void SendCoinsEntry::on_lookupUserButton_clicked()
     params.addQueryItem("platform", selectedPlatform);
     params.addQueryItem("coin", "MED");
     params.addQueryItem("simple", "true");
+    params.addQueryItem("unencode", "true");
 
     QString econdedParams(params.encodedQuery());
 
