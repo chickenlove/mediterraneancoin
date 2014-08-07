@@ -47,7 +47,7 @@ Var StartMenuGroup
 !insertmacro MUI_LANGUAGE English
 
 # Installer attributes
-OutFile litecoin-${VERSION}-win32-setup.exe
+OutFile mediterranenacoin-${VERSION}-win32-setup.exe
 InstallDir $PROGRAMFILES\Mediterraneancoin
  
 CRCCheck on
