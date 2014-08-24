@@ -41,6 +41,7 @@
         <file alias="qrcode">res/icons/qrcode.png</file>
         <file alias="debugwindow">res/icons/debugwindow.png</file>
         <file alias="lookupuser">res/icons/notsynced.png</file>
+        <file alias="lookupexchange">res/icons/notsynced.png</file>
     </qresource>
     <qresource prefix="/images">
         <file alias="about">res/images/about.png</file>

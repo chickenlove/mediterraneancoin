@@ -54,7 +54,7 @@ private slots:
     void on_pasteButton_clicked();
     void updateDisplayUnit();
     void on_lookupUserButton_clicked();
-
+    void on_lookupExchangeValueButton_clicked();
 private:
     Ui::SendCoinsEntry *ui;
     WalletModel *model;

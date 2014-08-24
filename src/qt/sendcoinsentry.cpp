@@ -56,6 +56,81 @@ void SendCoinsEntry::on_pasteButton_clicked()
     ui->payTo->setText(QApplication::clipboard()->text());
 }
 
+void SendCoinsEntry::on_lookupExchangeValueButton_clicked() {
+    if(!model)
+        return;
+
+    //QString lookupUsername = ui->payAmount->text();
+    QString emptyString = "";
+
+    bool validValue = true;
+
+    qint64 value = ui->payAmount->value(&validValue);
+
+
+    if (!validValue)
+    	return;
+
+    QString selectedExchangePlatform = ui->exchangeComboBox->currentText();
+
+    QString  cryptsyMed2BtcUrl("http://lookup.mediterraneancoin.org:9000/cryptsy/med2btc");
+    QString  btc38Med2BtcUrl("http://lookup.mediterraneancoin.org:9000/btc38/med2btc");
+
+    QString url("");
+
+    if (selectedExchangePlatform == "Cryptsy")
+    	url = cryptsyMed2BtcUrl;
+    else if (selectedExchangePlatform == "Bct38")
+    	url = btc38Med2BtcUrl;
+
+    if (url == "")
+    	return;
+
+    // create custom temporary event loop on stack
+    QEventLoop eventLoop;
+
+    // "quit()" the eventl-loop, when the network request "finished()"
+    QNetworkAccessManager mgr;
+    QObject::connect(&mgr, SIGNAL(finished(QNetworkReply*)), &eventLoop, SLOT(quit()));
+
+
+    QNetworkRequest req( QUrl( url + "" ) );
+
+    QNetworkReply *reply = mgr.get(req);
+
+    eventLoop.exec(); // blocks stack until "finished()" has been called
+
+    if (reply->error() == QNetworkReply::NoError) {
+      // Everything is ok => reply->readAll()
+
+        QByteArray bytes = reply->readAll();  // bytes
+        QString stringResult(bytes); // string
+
+        double exchangeValue = stringResult.toDouble();
+
+        double medValue = value / 100000000.;
+        double btcValue = exchangeValue * value / 100000000;
+
+
+        // nnn MED = xxx BTC (MED/BTC yyy)
+
+        ui->exchangeResultLabel->setText("" + QString::number(medValue,'f',2) + "MED~=" + QString::number(btcValue,'f',4) +
+        		"BTC (rate " + QString::number(exchangeValue,'f',8) + ")" );
+
+        //ui->exchangeResultLabel->setText(stringResult + " " + QString::number(value) + " " + QString::number(btcValue));
+
+      delete reply;
+      return;
+    }
+    else {
+      // error... reply->errorString()
+      delete reply;
+      return;
+    }
+
+
+}
+
 void SendCoinsEntry::on_lookupUserButton_clicked()
 {
     if(!model)
