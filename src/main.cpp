@@ -1203,6 +1203,12 @@ int64 static GetBlockValue(int nHeight, int64 nFees, uint256 prevHash)
 
     nSubsidy >>= (nHeight / 1036800); // Mediterraneancoin: 518k blocks in ~1 year
 
+/*
+    if (nSubsidy <= 0) {
+       nSubsidy = 1;
+    }
+*/
+
 return nSubsidy + nFees;
 
 
